@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Camera, Loader2 } from "lucide-react";
+import { Camera, Loader2, Upload } from "lucide-react";
 import Image from "next/image";
 
 import { GoogleGenerativeAI } from "@google/generative-ai";
@@ -12,7 +12,10 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 const genAI = new GoogleGenerativeAI(
   process.env.NEXT_PUBLIC_GEMINI_API_KEY || ""
 );
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+const model = genAI.getGenerativeModel({
+  model: "gemini-1.5-flash",
+  systemInstruction: "Return what animal specie the picture is, followed by a description of the image.\n\nOutput Format:\nAnimal: [animal specie]\nDescription: [image description]\n\nIf there is no animal, return \"No Animal\"\n\n",
+});
 
 export default function Home() {
   const [step, setStep] = useState(1);
@@ -50,14 +53,15 @@ export default function Home() {
   const handleMintNFT = async () => {
     setIsLoading(true);
     try {
+      const format = image?.split(";")[0].slice(5);
       const base64Image = image?.split(",")[1];
-      console.log(base64Image);
+      console.log(format, base64Image);
 
       const result = await model.generateContent([
         "Analyze this image and tell me what animal species it is, followed by a description of the image.",
         {
           inlineData: {
-            mimeType: "image/jpeg",
+            mimeType: format ?? "image/jpeg",
             data: base64Image ?? "",
           },
         },
@@ -130,6 +134,23 @@ export default function Home() {
     setError(null);
   };
 
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const result = reader.result as string;
+        setPreviewUrl(result);
+        setImage(result);
+        setStep(2);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   return (
     <div className="container mx-auto p-4 max-w-md">
       <h1 className="text-3xl font-bold mb-4 text-center text-white animate-pulse">
@@ -142,19 +163,44 @@ export default function Home() {
             Capture an Animal
           </CardHeader>
           <CardContent>
-            <video
-              ref={videoRef}
-              autoPlay
-              playsInline
-              muted
-              className="w-full h-64 object-cover rounded-lg mb-4"
-            />
+            {previewUrl && (
+              <div className="mt-4">
+                <img
+                  src={previewUrl}
+                  alt="Preview"
+                  className="max-w-full h-auto max-h-64 rounded-lg"
+                />
+              </div>
+            )}
+            {!previewUrl && (
+              <video
+                ref={videoRef}
+                autoPlay
+                playsInline
+                muted
+                className="w-full h-64 object-cover rounded-lg mb-4"
+              />
+            )}
             <Button
               onClick={handleCapture}
               className="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full transition-all duration-300 transform hover:scale-105"
             >
               <Camera className="mr-2 h-6 w-6" /> Capture
             </Button>
+            <Button
+              className="w-full mt-4"
+              onClick={() => fileInputRef?.current?.click()}
+            >
+              <Upload className="mr-2 h-4 w-4" /> Upload
+            </Button>
+            <input
+              type="file"
+              ref={fileInputRef}
+              onChange={handleFileChange}
+              accept="image/*"
+              capture="environment"
+              className="hidden"
+            />
           </CardContent>
         </Card>
       )}
