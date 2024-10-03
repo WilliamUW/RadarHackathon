@@ -92,7 +92,7 @@ export default function Home() {
         species === "No Animal" ||
         text.includes("No Animal")
       ) {
-        handleNonAnimal();
+        handleNonAnimal(description);
         return;
       } else {
         alert("minting nft");
@@ -126,9 +126,9 @@ export default function Home() {
     }
   };
 
-  const handleNonAnimal = () => {
+  const handleNonAnimal = (description?: string) => {
     setError(
-      "This doesn't appear to be an animal. Please try again with an animal photo."
+      `This doesn't appear to be an animal. Please try again with an animal photo. \n\nDescription: ` + description
     );
     setStep(5);
   };
@@ -267,7 +267,7 @@ export default function Home() {
       )}
 
       {step === 5 && error && (
-        <Alert variant="destructive" className="animate-shake">
+        <Alert variant="default" className="animate-shake">
           <AlertTitle>Error</AlertTitle>
           <AlertDescription>{error}</AlertDescription>
           <Button
