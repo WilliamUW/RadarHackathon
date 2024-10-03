@@ -8,6 +8,7 @@ import { Camera, Loader2, Upload } from "lucide-react";
 import Image from "next/image";
 
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 
 const genAI = new GoogleGenerativeAI(
   process.env.NEXT_PUBLIC_GEMINI_API_KEY || ""
@@ -160,6 +161,10 @@ export default function Home() {
       <h1 className="text-3xl font-bold mb-4 text-center text-white animate-pulse">
         SolanaDex Capture
       </h1>
+
+      <div className="border hover:border-slate-900 rounded">
+        <WalletMultiButton style={{}} />
+      </div>
 
       {step === 1 && (
         <Card className="bg-yellow-100 border-4 border-yellow-400 rounded-xl shadow-lg animate-bounce">
