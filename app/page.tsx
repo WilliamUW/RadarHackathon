@@ -14,7 +14,8 @@ const genAI = new GoogleGenerativeAI(
 );
 const model = genAI.getGenerativeModel({
   model: "gemini-1.5-flash",
-  systemInstruction: "Return what animal specie the picture is, followed by a description of the image.\n\nOutput Format:\nAnimal: [animal specie]\nDescription: [image description]\n\nIf there is no animal, return \"No Animal\"\n\n",
+  systemInstruction:
+    'Return what animal specie the picture is, followed by a description of the image.\n\nOutput Format:\nAnimal: [animal specie]\nDescription: [image description]\n\nIf there is no animal, return "No Animal"\n\n',
 });
 
 export default function Home() {
@@ -86,9 +87,16 @@ export default function Home() {
 
       console.log(species, description);
 
-      if (species === "Unknown") {
+      if (
+        species === "Unknown" ||
+        species === "No Animal" ||
+        text.includes("No Animal")
+      ) {
         handleNonAnimal();
         return;
+      } else {
+        alert("minting nft");
+        setStep(3);
       }
 
       // const mintNftResponse = await fetch("/api/mint-nft", {
@@ -110,8 +118,6 @@ export default function Home() {
       // } else {
       //   throw new Error(data.message || "Failed to mint NFT");
       // }
-      alert("minting nft");
-      setStep(3);
     } catch (error) {
       setError("Error minting NFT. Please try again. " + error);
       setStep(5);
@@ -135,7 +141,6 @@ export default function Home() {
   };
 
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -143,7 +148,6 @@ export default function Home() {
       const reader = new FileReader();
       reader.onloadend = () => {
         const result = reader.result as string;
-        setPreviewUrl(result);
         setImage(result);
         setStep(2);
       };
@@ -163,16 +167,16 @@ export default function Home() {
             Capture an Animal
           </CardHeader>
           <CardContent>
-            {previewUrl && (
+            {image && (
               <div className="mt-4">
                 <img
-                  src={previewUrl}
+                  src={image}
                   alt="Preview"
                   className="max-w-full h-auto max-h-64 rounded-lg"
                 />
               </div>
             )}
-            {!previewUrl && (
+            {!image && (
               <video
                 ref={videoRef}
                 autoPlay
