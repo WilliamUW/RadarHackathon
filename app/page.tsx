@@ -116,7 +116,7 @@ export default function Home() {
           image,
           species,
           description,
-          publicKey
+          publicKey,
         }),
       });
 
@@ -170,7 +170,7 @@ export default function Home() {
   return (
     <div className="container mx-auto p-4 max-w-md align-middle justify-center">
       <h1 className="text-3xl font-bold mb-4 text-center text-white animate-pulse">
-        SolanaDex Capture
+        Solana Go!
       </h1>
       <h1 className="text-3xl font-bold mb-10 text-center text-white">
         <WalletMultiButton style={{}} />
@@ -180,7 +180,7 @@ export default function Home() {
         <Card className="bg-gradient-to-br from-purple-400 to-blue-500 border-4 border-yellow-400 rounded-xl shadow-lg overflow-hidden">
           <CardHeader className="text-center">
             <h2 className="text-3xl font-bold text-white mb-4 animate-bounce">
-              Welcome to SolanaDex!
+              Welcome to Solana Go!
             </h2>
           </CardHeader>
           <CardContent className="flex flex-col items-center">
