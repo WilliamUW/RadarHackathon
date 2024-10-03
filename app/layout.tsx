@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Inter } from "next/font/google";
 import BottomNav from "@/components/ButtomNav";
-import { SolanaContext } from "./SolanaContext";
 import AppWalletProvider from "@/components/AppWalletProvider";
 
 export const metadata: Metadata = {

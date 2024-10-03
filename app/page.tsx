@@ -4,11 +4,19 @@ import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Camera, Loader2, Upload } from "lucide-react";
+import {
+  Camera,
+  CameraIcon,
+  Coins,
+  Loader2,
+  Upload,
+  Wallet,
+} from "lucide-react";
 import Image from "next/image";
 
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
+import { useWallet } from "@solana/wallet-adapter-react";
 
 const genAI = new GoogleGenerativeAI(
   process.env.NEXT_PUBLIC_GEMINI_API_KEY || ""
@@ -156,17 +164,71 @@ export default function Home() {
     }
   };
 
+  const { publicKey } = useWallet();
+
   return (
-    <div className="container mx-auto p-4 max-w-md">
+    <div className="container mx-auto p-4 max-w-md align-middle justify-center">
       <h1 className="text-3xl font-bold mb-4 text-center text-white animate-pulse">
         SolanaDex Capture
       </h1>
-
-      <div className="border hover:border-slate-900 rounded">
+      <h1 className="text-3xl font-bold mb-10 text-center text-white">
         <WalletMultiButton style={{}} />
-      </div>
+      </h1>
 
-      {step === 1 && (
+      {!publicKey && (
+        <Card className="bg-gradient-to-br from-purple-400 to-blue-500 border-4 border-yellow-400 rounded-xl shadow-lg overflow-hidden">
+          <CardHeader className="text-center">
+            <h2 className="text-3xl font-bold text-white mb-4 animate-bounce">
+              Welcome to SolanaDex!
+            </h2>
+          </CardHeader>
+          <CardContent className="flex flex-col items-center">
+            <div className="mb-8 relative w-64 h-64">
+              <Image
+                src="/logo.webp"
+                alt="SolanaDex Logo"
+                width={256}
+                height={256}
+                className="rounded-full animate-spin-slow"
+              />
+              <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
+                <CameraIcon className="w-32 h-32 text-white animate-pulse" />
+              </div>
+            </div>
+            <div className="space-y-6 w-full">
+              <div
+                className="flex items-center space-x-4 animate-fade-in-up"
+                style={{ animationDelay: "0.2s" }}
+              >
+                <Wallet className="w-8 h-8 text-yellow-300" />
+                <p className="text-white text-lg">
+                  1. Connect your Solana Wallet
+                </p>
+              </div>
+              <div
+                className="flex items-center space-x-4 animate-fade-in-up"
+                style={{ animationDelay: "0.4s" }}
+              >
+                <Camera className="w-8 h-8 text-green-300" />
+                <p className="text-white text-lg">
+                  2. Take a picture of an animal
+                </p>
+              </div>
+              <div
+                className="flex items-center space-x-4 animate-fade-in-up"
+                style={{ animationDelay: "0.6s" }}
+              >
+                <Coins className="w-8 h-8 text-blue-300" />
+                <p className="text-white text-lg">
+                  3. Mint a Solana NFT to support wildlife tracking
+                </p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      {publicKey && step === 1 && (
         <Card className="bg-yellow-100 border-4 border-yellow-400 rounded-xl shadow-lg animate-bounce">
           <CardHeader className="text-center text-xl font-bold text-blue-600">
             Capture an Animal
