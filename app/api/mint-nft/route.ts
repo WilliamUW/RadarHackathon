@@ -10,6 +10,8 @@ export async function POST(request: Request) {
 
   const { image, species, description } = await request.json();
 
+  console.log(image);
+
   const url = `https://${env}.crossmint.com/api/2022-06-09/collections/default/nfts`;
   const options = {
     method: "POST",
