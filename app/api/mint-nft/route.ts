@@ -5,10 +5,9 @@ export async function POST(request: Request) {
   const apiKey = process.env.CROSSMINT_API_KEY;
   const chain = "solana";
   const env = "staging";
-  const recipientEmail = "bwilliamwang@gmail.com";
-  const recipientAddress = `email:${recipientEmail}:${chain}`;
+  const { image, species, description, publicKey } = await request.json();
 
-  const { image, species, description } = await request.json();
+  const recipientAddress = `${chain}:${publicKey}`;
 
   console.log(image);
 

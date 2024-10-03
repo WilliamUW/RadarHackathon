@@ -28,6 +28,8 @@ const model = genAI.getGenerativeModel({
 });
 
 export default function Home() {
+  const { publicKey } = useWallet();
+
   const [step, setStep] = useState(1);
   const [image, setImage] = useState<string | null>(null);
   const [nftData, setNftData] = useState<{ explorerUrl: string } | null>(null);
@@ -114,6 +116,7 @@ export default function Home() {
           image,
           species,
           description,
+          publicKey
         }),
       });
 
@@ -163,8 +166,6 @@ export default function Home() {
       reader.readAsDataURL(file);
     }
   };
-
-  const { publicKey } = useWallet();
 
   return (
     <div className="container mx-auto p-4 max-w-md align-middle justify-center">
