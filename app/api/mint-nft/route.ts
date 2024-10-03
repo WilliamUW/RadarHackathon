@@ -24,21 +24,26 @@ export async function POST(request: Request) {
       recipient: recipientAddress,
       metadata: {
         name: `${species} NFT`,
-        image: "https://picsum.photos/400",
+        image:
+          "https://images.prestigeonline.com/wp-content/uploads/sites/6/2024/09/26220054/459118063_539597145247047_8853740358288590339_n.jpeg",
 
         // image: image,
         description: description,
         attributes: [
           {
-            trait_type: "species",
+            trait_type: "Species",
             value: species,
           },
           {
-            trait_type: "location",
-            value: "Current Location",
+            trait_type: "Latitude",
+            value: "40.7468733",
           },
           {
-            trait_type: "time",
+            trait_type: "Longitude",
+            value: "-73.9947449",
+          },
+          {
+            trait_type: "Time Captured",
             value: new Date().toISOString(),
           },
         ],

@@ -202,7 +202,6 @@ export default function Home() {
               ref={fileInputRef}
               onChange={handleFileChange}
               accept="image/*"
-              capture="environment"
               className="hidden"
             />
           </CardContent>
