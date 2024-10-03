@@ -94,30 +94,29 @@ export default function Home() {
       ) {
         handleNonAnimal(description);
         return;
-      } else {
-        alert("minting nft");
-        setStep(3);
       }
 
-      // const mintNftResponse = await fetch("/api/mint-nft", {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify({
-      //     image,
-      //     species: "Unknown",
-      //     location: "Current Location",
-      //     time: new Date().toISOString(),
-      //   }),
-      // });
-      // const data = await mintNftResponse.json();
-      // if (mintNftResponse.ok) {
-      //   setNftData(data);
-      //   setStep(3);
-      // } else {
-      //   throw new Error(data.message || "Failed to mint NFT");
-      // }
+      const mintNftResponse = await fetch("/api/mint-nft", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          image,
+          species,
+          description,
+        }),
+      });
+
+      if (!mintNftResponse.ok) {
+        const errorData = await mintNftResponse.json();
+        throw new Error(errorData.error || "Failed to mint NFT");
+      }
+
+      const data = await mintNftResponse.json();
+      console.log(data);
+      setNftData(data);
+      setStep(3);
     } catch (error) {
       setError("Error minting NFT. Please try again. " + error);
       setStep(5);
@@ -128,7 +127,8 @@ export default function Home() {
 
   const handleNonAnimal = (description?: string) => {
     setError(
-      `This doesn't appear to be an animal. Please try again with an animal photo. \n\nDescription: ` + description
+      `This doesn't appear to be an animal. Please try again with an animal photo. \n\nDescription: ` +
+        description
     );
     setStep(5);
   };
@@ -246,14 +246,14 @@ export default function Home() {
           </CardHeader>
           <CardContent>
             <p className="mb-4 text-center">
-              Block Explorer URL:{" "}
+              Minted NFT Data:{" "}
               <a
                 href={nftData.explorerUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-blue-500 hover:underline"
               >
-                {nftData.explorerUrl}
+                {JSON.stringify(nftData)}
               </a>
             </p>
             <Button
