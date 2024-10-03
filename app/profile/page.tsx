@@ -1,6 +1,5 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import Image from 'next/image'
 
 export default function Profile() {
   return (
@@ -8,8 +7,8 @@ export default function Profile() {
       <h1 className="text-3xl font-bold mb-4 text-center text-white animate-pulse">Your Profile</h1>
       <Card className="bg-white border-4 border-blue-400 rounded-xl shadow-lg overflow-hidden">
         <CardHeader className="p-4 text-center">
-          <Image src="/placeholder.svg?height=100&width=100" alt="Profile" width={100} height={100} className="rounded-full mx-auto mb-4" />
-          <h2 className="text-2xl font-bold text-purple-600">Jane Doe</h2>
+          <img src="https://media.licdn.com/dms/image/v2/D5603AQG5efoV2B-P8Q/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1674067603082?e=1733356800&v=beta&t=KBy_a7n2ss4HXhUensd8bDGKrmkQ-AWWdCoVzhVYVFI" alt="Profile" width={100} height={100} className="rounded-full mx-auto mb-4" />
+          <h2 className="text-2xl font-bold text-purple-600">William Wang</h2>
           <p className="text-sm text-gray-500">Animal Explorer Extraordinaire</p>
         </CardHeader>
         <CardContent className="p-4">
