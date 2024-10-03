@@ -9,7 +9,8 @@ export default function Profile() {
         <CardHeader className="p-4 text-center">
           <img src="https://media.licdn.com/dms/image/v2/D5603AQG5efoV2B-P8Q/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1674067603082?e=1733356800&v=beta&t=KBy_a7n2ss4HXhUensd8bDGKrmkQ-AWWdCoVzhVYVFI" alt="Profile" width={100} height={100} className="rounded-full mx-auto mb-4" />
           <h2 className="text-2xl font-bold text-purple-600">William Wang</h2>
-          <p className="text-sm text-gray-500">Animal Explorer Extraordinaire</p>
+          <p className="text-sm text-gray-500">bwilliamwang@gmail.com</p>
+          <p className="text-sm text-green-500">Animal Explorer Extraordinaire</p>
         </CardHeader>
         <CardContent className="p-4">
           <div className="mb-4">
