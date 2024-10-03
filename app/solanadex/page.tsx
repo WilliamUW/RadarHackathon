@@ -1,10 +1,10 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 
 const animals = [
-  { id: 1, name: 'Moo Deng', species: 'Red Panda', location: 'Himalayan Forest', date: '2023-06-15', description: 'A cute red panda spotted in the wild!', image: 'https://images.prestigeonline.com/wp-content/uploads/sites/6/2024/09/26220054/459118063_539597145247047_8853740358288590339_n.jpeg' },
-  { id: 2, name: 'Pesto', species: 'Green Tree Python', location: 'Amazon Rainforest', date: '2023-06-10', description: 'A beautiful green tree python coiled around a branch.', image: 'https://www.pedestrian.tv/wp-content/uploads/2024/09/Pesto-Gender-Reveal.jpg?quality=75&w=1024' },
-  { id: 3, name: 'Spots', species: 'Leopard', location: 'African Savanna', date: '2023-06-05', description: 'A majestic leopard lounging on a tree.', image: 'https://anthropocenemagazine.org/wp-content/uploads/2018/03/leopard2.jpg' },
-  { id: 4, name: 'Fluffy', species: 'Arctic Fox', location: 'Tundra', date: '2023-05-30', description: 'An adorable arctic fox with its winter coat.', image: 'https://i.redd.it/8y9uiabj84r21.jpg' },
+  { id: 1, name: 'Moo Deng', species: 'Pygmy Hippopotamus', location: 'Khao Kheow Open Zoo', date: '2024-10-2', description: 'A cute Pygmy Hippopotamus spotted in the wild!', image: 'https://images.prestigeonline.com/wp-content/uploads/sites/6/2024/09/26220054/459118063_539597145247047_8853740358288590339_n.jpeg' },
+  { id: 2, name: 'Pesto', species: 'King Penguin', location: 'Sea Life Melbourne Aquarium', date: '2024-09-10', description: 'A beautiful King Penguin spotted at the Sea Life Melbourne Aquarium!', image: 'https://www.pedestrian.tv/wp-content/uploads/2024/09/Pesto-Gender-Reveal.jpg?quality=75&w=1024' },
+  { id: 3, name: 'Spots', species: 'Leopard', location: 'African Savanna', date: '2024-08-05', description: 'A majestic leopard lounging on a tree.', image: 'https://anthropocenemagazine.org/wp-content/uploads/2018/03/leopard2.jpg' },
+  { id: 4, name: 'Fluffy', species: 'Arctic Fox', location: 'Tundra', date: '2024-05-30', description: 'An adorable arctic fox with its winter coat.', image: 'https://i.redd.it/8y9uiabj84r21.jpg' },
 ]
 
 export default function SolanaDex() {

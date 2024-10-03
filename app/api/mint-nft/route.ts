@@ -9,7 +9,7 @@ export async function POST(request: Request) {
 
   const recipientAddress = `${chain}:${publicKey}`;
 
-  console.log(image);
+  console.log(publicKey, image);
 
   const url = `https://${env}.crossmint.com/api/2022-06-09/collections/default/nfts`;
   const options = {
